@@ -1,0 +1,31 @@
+<header>{{ title }}</header>
+<nav class="mdl-navigation">
+  <base-menu-item *ngFor="let item of menu" [data]="item"></base-menu-item>
+
+  <div class="mdl-layout-spacer"></div>
+
+  <hr/>
+  <base-menu-item
+    [data]="{
+      name: 'Shares Info on GitHub ',
+      href: 'https://github.com/TomDixon63/SharesInfo.git',
+      icon: 'link'
+    }"
+  ></base-menu-item>
+  <div class="mdl-layout-spacer"></div>
+  <base-menu-item
+    [data]="{
+      name: 'Dark Theme on GitHub',
+      href: 'https://github.com/CreativeIT/material-angular-dashboard',
+      icon: 'link'
+    }"
+  ></base-menu-item>
+  <div class="mdl-layout-spacer"></div>
+   <base-menu-item
+    [data]="{
+      name: 'Alpha Vantage API',
+      href: 'https://www.alphavantage.co/documentation/',
+      icon: 'link'
+    }"
+  ></base-menu-item>
+</nav>
