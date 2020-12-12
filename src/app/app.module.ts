@@ -6,9 +6,7 @@ import { AuthInterceptor, AuthService, FakeBackendInterceptor } from '@services/
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ComponentsModule } from './pages/components';
 import { DashboardModule } from './pages/dashboard';
-
 import { SearchComponent } from './pages/search/search.component';
 import { WatchlistComponent } from './pages/watchlist/watchlist.component';
 
@@ -17,7 +15,6 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ComponentsModule,
     DashboardModule,
     HttpClientModule,
   ],
