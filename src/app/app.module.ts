@@ -7,15 +7,18 @@ import { AuthInterceptor, AuthService, FakeBackendInterceptor } from '@services/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './pages/dashboard';
-import { SearchComponent } from './pages/search/search.component';
-import { WatchlistComponent } from './pages/watchlist/watchlist.component';
+import { SearchModule} from './pages/search';
+import { WatchlistModule } from './pages/watchlist'
+
 
 @NgModule({
-  declarations: [AppComponent, SearchComponent, WatchlistComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
+    SearchModule,
+    WatchlistModule,
     HttpClientModule,
   ],
   providers: [
