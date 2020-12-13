@@ -18,9 +18,13 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
   // search symbol (example: GOOGL)
   symbol: string = "";
   jsonData: any;
-  suggestionsList: ShareInfo[] = [];
-
   
+
+  //table
+
+  public headers = ['Symbol', 'Name', 'Type', 'Region', 'Marketopen', 'Marketclose', 'Timezone', 'Currency', 'Matchscore', '  '];
+  public suggestionsList: ShareInfo[] = [];
+
   constructor(private alphavantageService: AlphavantageService) {
     super();
   }
@@ -35,7 +39,14 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
       for (const item in this.jsonData) {
         const symbol = this.jsonData[item]["1. symbol"];
         const name = this.jsonData[item]["2. name"];
-        let shareInfo: ShareInfo = new ShareInfo(symbol, name);
+        const type = this.jsonData[item]["3. type"];
+        const region = this.jsonData[item]["4. region"];
+        const marketOpen = this.jsonData[item]["5. marketOpen"];
+        const marketClose = this.jsonData[item]["6. marketClose"];
+        const timezone = this.jsonData[item]["7. timezone"];
+        const currency = this.jsonData[item]["8. currency"];
+        const matchScore = this.jsonData[item]["9. matchScore"];
+        let shareInfo: ShareInfo = new ShareInfo(symbol, name, type, region, marketOpen, marketClose, timezone,currency, matchScore);
         this.suggestionsList.push(shareInfo);
         console.log(shareInfo);
       }
