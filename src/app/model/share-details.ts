@@ -1,5 +1,19 @@
+//share details information
 export class ShareDetails {
-    /* alpha vantage json response:
+  symbol: string;
+  open: number;
+  high: number;
+  low: number;
+  price: number;
+  volume: number;
+  latestTradingDay: string;
+  previousClose: string;
+  change: string;
+  changePercent: string;
+
+  constructor() {}
+
+  /** alpha vantage json response:
     {
         "Global Quote": {
             "01. symbol": "IBM",
@@ -14,18 +28,4 @@ export class ShareDetails {
             "10. change percent": "-0.6675%"
         }
     }*/
-
-    constructor(
-        public symbol: string,
-        public open: number,
-        public high: number,
-        public low: number,
-        public price: number,
-        public volume: number,
-        public latestTradingDay: string,
-        public previousClose: string,
-        public change: String,
-        public changePercent: string
-        
-    ){}
 }

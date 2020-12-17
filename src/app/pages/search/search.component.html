@@ -28,6 +28,7 @@
           type="button"
           (click)="generateSuggestionsList(searchBox.value)"
           class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+          style="float:right"
         >
           Search
         </button>
@@ -84,13 +85,15 @@
                 {{ share.matchScore }}
               </td>
               <td class="mdl-data-table__cell--non-numeric">
-                <button
-                  type="button"
-                  (click)="generateSuggestionsList(searchBox.value)"
-                  class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-                >
-                  Details
-                </button>
+              
+               <button
+          type="button"
+          (click)="navigateToDetailsPage(share.symbol)"
+          class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+        >
+         Details
+        </button>
+              
               </td>
             </tr>
           </tbody>

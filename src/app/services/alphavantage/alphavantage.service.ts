@@ -8,22 +8,27 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class AlphavantageService {
-
-  //todo replace with key from login
+  // TODO: replace with key from login
   private API_KEY = "M889HPMD6E6FF5OQ";
   private ALPHA_VANTAGE_URL = "https://www.alphavantage.co/query";
- 
+
   //search suggestions by keyword(s), example: https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=IBM&apikey=demo
-  private SEARCH_SUGGESTIONS_URL = this.ALPHA_VANTAGE_URL + "?function=SYMBOL_SEARCH";
+  private SEARCH_SUGGESTIONS_URL =
+    this.ALPHA_VANTAGE_URL + "?function=SYMBOL_SEARCH";
 
   //search share details by symbol, example: https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=demo
-  private SEARCH_DETAILS_URL = this.ALPHA_VANTAGE_URL + "?function=GLOBAL_QUOTE";
+  private SEARCH_DETAILS_URL =
+    this.ALPHA_VANTAGE_URL + "?function=GLOBAL_QUOTE";
 
   //search intraday data by symbol, example: https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo
-  private INTRADAY_URL = this.ALPHA_VANTAGE_URL + "?function=TIME_SERIES_INTRADAY";
+  private INTRADAY_URL =
+    this.ALPHA_VANTAGE_URL + "?function=TIME_SERIES_INTRADAY";
 
   //time interval for intraday search
   private INTRADAY_INTERVAL = "5min";
+
+  // company data, example: https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+  private COMPANY_URL = this.ALPHA_VANTAGE_URL + "?function=OVERVIEW";
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +49,13 @@ export class AlphavantageService {
   //share intraday data by symbol
   public getShareIntraDayData(symbol): Observable<any> {
     const url = `${this.INTRADAY_URL}&symbol=${symbol}&interval=${this.INTRADAY_INTERVAL}&apikey=${this.API_KEY}`;
+    console.log(url);
+    return this.http.get(url);
+  }
+
+  //company information
+  public getCompanyInfo(symbol): Observable<any> {
+    const url = `${this.COMPANY_URL}&symbol=${symbol}&apikey=${this.API_KEY}`;
     console.log(url);
     return this.http.get(url);
   }

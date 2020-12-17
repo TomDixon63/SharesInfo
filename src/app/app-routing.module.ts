@@ -1,3 +1,5 @@
+import { ErrorComponent } from './pages/error/error.component';
+import { DetailsComponent } from './pages/details/details.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -20,9 +22,10 @@ import { WatchlistComponent } from './pages/watchlist/watchlist.component';
           { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
           { path: 'search', component: SearchComponent, pathMatch: 'full' },
           { path: 'watchlist', component: WatchlistComponent, pathMatch: 'full' },
-          { path: '**', redirectTo: '/ypages/404' },
-        ] }, // add 'canActivate: AuthGuard' for catching unauth users
-        { path: '**', redirectTo: '/pages/404' },
+          { path: 'details', component: DetailsComponent, pathMatch: 'full' },
+          { path: '**', component: ErrorComponent, pathMatch: 'full' },
+        ] },
+        { path: '**', component: ErrorComponent, pathMatch: 'full'},
       ],
       { useHash: true },
     ),

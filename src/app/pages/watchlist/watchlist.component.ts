@@ -7,6 +7,7 @@ import { UpgradableComponent } from 'theme/components/upgradable';
   //styleUrls: ['./watchlist.component.scss']
 })
 export class WatchlistComponent extends UpgradableComponent {
+  //SCSS
   @HostBinding('class.mdl-grid') public readonly mdlGrid = true;
   @HostBinding('class.mdl-grid--no-spacing') public readonly mdlGridNoSpacing = true;
 }
