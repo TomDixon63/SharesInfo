@@ -12,7 +12,7 @@
     "Rest",
     "ng"
   ],
-   "scripts": {
+  "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@angular/animations": "10.0.8",
+    "@angular/cdk": "^11.0.3",
     "@angular/common": "10.0.8",
     "@angular/compiler": "10.0.8",
     "@angular/core": "10.0.8",
@@ -38,6 +39,7 @@
     "@angular/platform-browser": "10.0.8",
     "@angular/platform-browser-dynamic": "10.0.8",
     "@angular/router": "10.0.8",
+    "@swimlane/ngx-charts": "^16.0.0",
     "@types/googlemaps": "^3.30.18",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.6",

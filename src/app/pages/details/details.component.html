@@ -2,12 +2,13 @@
   class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
 >
   <div
-    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
+    class="mdl-cell mdl-cell--10-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
   >
     <base-card>
       <base-card-body>
         <button
           type="button"
+          (click)="navigateBack()"
           class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
         >
           Back
@@ -23,70 +24,90 @@
     </base-card>
   </div>
 
-  <div
-    class="mdl-cell mdl-cell--3-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
-  >
+  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
     <base-card>
       <base-card-title>
         <h2 class="mdl-card__title-text">
           {{ company.name }} ( {{ shareDetails.symbol }} )
         </h2>
       </base-card-title>
-      <base-card-body> 
-      <ul class="mdl-list">
-        <li class="mdl-list__item ">
-          <span class="mdl-list__item-primary-content list__item-text">Price</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ shareDetails.price }} USD</span>
-        </li>
-        <li class="mdl-list__item list__item--border-top">
-          <span class="mdl-list__item-primary-content list__item-text">Exchange</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ company.exchange }}</span>
-        </li>
-        <li class="mdl-list__item list__item--border-top">
-          <span class="mdl-list__item-primary-content list__item-text">Country</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ company.country }}</span>
-        </li>
-        <li class="mdl-list__item list__item--border-top">
-          <span class="mdl-list__item-primary-content list__item-text">Sector</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ company.sector }}</span>
-        </li>
-        <li class="mdl-list__item list__item--border-top">
-          <span class="mdl-list__item-primary-content list__item-text">52 Week High</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ company.yearHigh }} USD</span>
-        </li>
-        <li class="mdl-list__item list__item--border-top">
-          <span class="mdl-list__item-primary-content list__item-text">52 Week Low</span>
-          <span class="mdl-list__item-secondary-content trending__percent">{{ company.yearLow }} USD</span>
-        </li>
+      <base-card-body>
+        <ul class="mdl-list">
+          <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >Price</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent"
+              >{{ shareDetails.price }} USD</span
+            >
+          </li>
+          <li class="mdl-list__item list__item--border-top">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >Exchange</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent">{{
+              company.exchange
+            }}</span>
+          </li>
+          <li class="mdl-list__item list__item--border-top">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >Country</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent">{{
+              company.country
+            }}</span>
+          </li>
+          <li class="mdl-list__item list__item--border-top">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >Sector</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent">{{
+              company.sector
+            }}</span>
+          </li>
+          <li class="mdl-list__item list__item--border-top">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >52 Week High</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent"
+              >{{ company.yearHigh }} USD</span
+            >
+          </li>
+          <li class="mdl-list__item list__item--border-top">
+            <span class="mdl-list__item-primary-content list__item-text"
+              >52 Week Low</span
+            >
+            <span class="mdl-list__item-secondary-content trending__percent"
+              >{{ company.yearLow }} USD</span
+            >
+          </li>
         </ul>
-    
-    </base-card-body>
+      </base-card-body>
     </base-card>
   </div>
 
-  <div
-    class="mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
-  >
+  <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
     <base-card>
       <base-card-title>
-        <h2 class="mdl-card__title-text">Chart</h2>
+      <h2 class="mdl-card__title-text"> 52 Weeks Chart</h2>
       </base-card-title>
-      <base-card-body>
-      
+      <base-card-body> 
+      <app-chart></app-chart>
+
     </base-card-body>
     </base-card>
   </div>
 
   <div
-    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
+    class="mdl-cell mdl-cell--10-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
   >
     <base-card>
       <base-card-title>
         <h2 class="mdl-card__title-text">Company Info</h2>
       </base-card-title>
       <base-card-body>
-      {{ company.description }}
-    </base-card-body>
+        {{ company.description }}
+      </base-card-body>
     </base-card>
   </div>
 </div>

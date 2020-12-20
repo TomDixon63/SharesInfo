@@ -24,10 +24,14 @@ export class AlphavantageService {
   private INTRADAY_URL =
     this.ALPHA_VANTAGE_URL + "?function=TIME_SERIES_INTRADAY";
 
-  //time interval for intraday search
+  //search weekly by symbol, example: https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=IBM&apikey=demo
+  private WEEKLY_URL =
+    this.ALPHA_VANTAGE_URL + "?function=TIME_SERIES_WEEKLY";  
+
+  //time interval for intraday search, alpha does not support > 5min
   private INTRADAY_INTERVAL = "5min";
 
-  // company data, example: https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
+  //company data, example: https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
   private COMPANY_URL = this.ALPHA_VANTAGE_URL + "?function=OVERVIEW";
 
   constructor(private http: HttpClient) {}
@@ -49,6 +53,13 @@ export class AlphavantageService {
   //share intraday data by symbol
   public getShareIntraDayData(symbol): Observable<any> {
     const url = `${this.INTRADAY_URL}&symbol=${symbol}&interval=${this.INTRADAY_INTERVAL}&apikey=${this.API_KEY}`;
+    console.log(url);
+    return this.http.get(url);
+  }
+
+  //share weekly data by symbol
+  public getShareWeeklyData(symbol): Observable<any> {
+    const url = `${this.WEEKLY_URL}&symbol=${symbol}&interval=${this.INTRADAY_INTERVAL}&apikey=${this.API_KEY}`;
     console.log(url);
     return this.http.get(url);
   }

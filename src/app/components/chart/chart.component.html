@@ -1,0 +1,17 @@
+<div *ngIf="chartDataLoaded">
+  <ngx-charts-line-chart
+    [results]="chartData"
+    [scheme]="colorScheme"
+    [xAxis]="true"
+    [yAxis]="true"
+    [roundDomains]="true"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="'Date'"
+    [yAxisLabel]="'Price'"
+    [xAxisTicks]="xAxisTicks"
+    [autoScale]="true"
+    [gradient]="true"
+  >
+  </ngx-charts-line-chart>
+</div>

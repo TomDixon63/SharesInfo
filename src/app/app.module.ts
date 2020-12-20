@@ -1,6 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // TODO: check -->
 import { AuthInterceptor, AuthService, FakeBackendInterceptor } from '@services/*';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,18 +13,20 @@ import { WatchlistModule } from './pages/watchlist';
 
 
 
+
 @NgModule({
   declarations: [
-    AppComponent, 
+    AppComponent 
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     DashboardModule,
     SearchModule,
     DetailsModule,
     WatchlistModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     AuthService,
