@@ -3,6 +3,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { analyzeAndValidateNgModules } from "@angular/compiler";
 
 @Injectable({
   providedIn: "root",
@@ -28,11 +29,12 @@ export class AlphavantageService {
   private WEEKLY_URL =
     this.ALPHA_VANTAGE_URL + "?function=TIME_SERIES_WEEKLY";  
 
-  //time interval for intraday search, alpha does not support > 5min
+  //time interval for intraday search, alpha does not support > 5min when free api key
   private INTRADAY_INTERVAL = "5min";
 
   //company data, example: https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo
   private COMPANY_URL = this.ALPHA_VANTAGE_URL + "?function=OVERVIEW";
+
 
   constructor(private http: HttpClient) {}
 

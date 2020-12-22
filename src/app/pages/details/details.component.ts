@@ -1,10 +1,10 @@
 import { Component, HostBinding, OnInit } from "@angular/core";
 import { UpgradableComponent } from "theme/components/upgradable";
-import { Router } from "@angular/router";
 import { ActivatedRoute } from "@angular/router";
 import { Company } from "./../../model/company";
 import { ShareDetails } from "./../../model/share-details";
 import { AlphavantageService } from "./../../services/alphavantage/alphavantage.service";
+import { Location } from '@angular/common';
 
 @Component({
   selector: "app-details",
@@ -30,7 +30,7 @@ export class DetailsComponent extends UpgradableComponent implements OnInit {
   constructor(
     private alphavantageService: AlphavantageService,
     private route: ActivatedRoute,
-    private router: Router
+    private location: Location
   ) {
     super();
   }
@@ -90,6 +90,6 @@ export class DetailsComponent extends UpgradableComponent implements OnInit {
 
   // navigate back
   public navigateBack() {
-    this.router.navigate(['/app/search']);
+    this.location.back();
   }
 }

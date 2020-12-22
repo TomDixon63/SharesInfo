@@ -9,10 +9,7 @@ import { AppComponent } from './app.component';
 import { DashboardModule } from './pages/dashboard';
 import { SearchModule} from './pages/search';
 import { DetailsModule } from './pages/details/details.module';
-import { WatchlistModule } from './pages/watchlist';
-
-
-
+import { CompareModule } from './pages/compare';
 
 @NgModule({
   declarations: [
@@ -25,7 +22,7 @@ import { WatchlistModule } from './pages/watchlist';
     DashboardModule,
     SearchModule,
     DetailsModule,
-    WatchlistModule,
+    CompareModule,
     HttpClientModule
   ],
   providers: [

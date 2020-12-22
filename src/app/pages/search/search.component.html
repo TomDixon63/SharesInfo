@@ -1,5 +1,5 @@
 <div
-  class="mdl-grid mdl-cell mdl-cell--9-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
+  class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
 >
   <div
     class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
@@ -28,7 +28,7 @@
           type="button"
           (click)="generateSuggestionsList(searchBox.value)"
           class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-          style="float:right"
+          style="float: right"
         >
           Search
         </button>
@@ -44,7 +44,10 @@
         <h2 class="mdl-card__title-text">Search results</h2>
       </base-card-title>
       <base-card-body class="no-padding">
-      <table class="mdl-data-table mdl-js-data-table bordered-table" style="width:99%">
+        <table
+          class="mdl-data-table mdl-js-data-table bordered-table"
+          style="width: 99%"
+        >
           <thead>
             <tr>
               <th
@@ -85,15 +88,13 @@
                 {{ share.matchScore }}
               </td>
               <td class="mdl-data-table__cell--non-numeric">
-              
-               <button
-          type="button"
-          (click)="navigateToDetailsPage(share.symbol)"
-          class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-        >
-         Details
-        </button>
-              
+                <button
+                  type="button"
+                  (click)="navigateToDetailsPage(share.symbol)"
+                  class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+                >
+                 Details
+                </button>
               </td>
             </tr>
           </tbody>

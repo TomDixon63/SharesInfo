@@ -27,7 +27,7 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
   symbol: string = "";
   jsonData: any;
 
-  //table
+  //table headers
   public headers = [
     "Symbol",
     "Name",

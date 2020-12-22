@@ -12,6 +12,6 @@ export class SidebarComponent extends BaseSidebarComponent {
   public menu = [
     { name: 'Dashboard', link: '/app/dashboard', icon: 'dashboard' },
     { name: 'Search', link: '/app/search', icon: 'search' },
-    { name: 'My Watchlist', link: '/app/watchlist', icon: 'list' },
+    { name: 'Compare', link: '/app/compare', icon: 'list' },
   ];
 }
