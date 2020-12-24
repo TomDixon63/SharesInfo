@@ -13,7 +13,6 @@ import { UpgradableComponent } from "theme/components/upgradable";
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
-  //styleUrls: ['./search.component.scss']
 })
 export class SearchComponent extends UpgradableComponent implements OnInit {
   //SCSS
@@ -21,10 +20,6 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
   @HostBinding("class.mdl-grid--no-spacing")
   public readonly mdlGridNoSpacing = true;
 
-  @Output() symbolEvent = new EventEmitter<string>();
-
-  // search symbol (example: GOOGL)
-  symbol: string = "";
   jsonData: any;
 
   //table headers
@@ -87,19 +82,5 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
   public navigateToDetailsPage(symbol: string) {
     var url: string = "/app/details?symbol=" + symbol;
     this.router.navigateByUrl(url);
-  }
-
-  populateSearch(value: string) {
-    this.symbol = value;
-    this.sendSymbol();
-  }
-
-  //receiver for symbol
-  receiveSymbol($event) {
-    this.symbol = $event;
-  }
-  
-  sendSymbol() {
-    if (this.symbol != "") this.symbolEvent.emit(this.symbol);
   }
 }

@@ -17,8 +17,11 @@
               class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone form__article"
             >
               <h3 class="text-color--smooth-gray">First share</h3>
-              <div class="mdl-textfield mdl-js-textfield full-size">
+              <div
+                class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
+              >
                 <input
+                  #searchBoxFirst
                   class="mdl-textfield__input"
                   type="text"
                   id="first-symbol"
@@ -29,6 +32,8 @@
               </div>
               <div style="float: right">
                 <button
+                  type="button"
+                  (click)="getSharePerformanceData(searchBoxFirst.value, searchFirst)"
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
                 >
                   <i class="material-icons">search</i>
@@ -37,9 +42,8 @@
               </div>
               <div style="margin-top: 70px">
                 <h5 class="mdl-card__title-text text-color--white">GOOGL</h5>
-               
+
                 <ul class="mdl-list" style="margin-top: 10px">
-                
                   <li class="mdl-list__item list__item--border-top">
                     <span class="mdl-list__item-primary-content list__item-text"
                       >1 Month</span
@@ -100,6 +104,7 @@
                 class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
               >
                 <input
+                  #searchBoxSecond
                   class="mdl-textfield__input"
                   type="text"
                   id="second-symbol"
@@ -110,8 +115,10 @@
               </div>
               <div style="float: right">
                 <button
+                  type="button"
+                  (click)="getSharePerformanceData(searchBoxSecond.value, searchSecond)"
+                  [disabled]="isSearchButtonSecondDisabled"
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
-                  disabled
                 >
                   <i class="material-icons">search</i>
                   Search
@@ -127,6 +134,7 @@
                 class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
               >
                 <input
+                  #searchBoxThird
                   class="mdl-textfield__input"
                   type="text"
                   id="third-symbol"
@@ -137,8 +145,10 @@
               </div>
               <div style="float: right">
                 <button
+                  type="button"
+                  (click)="getSharePerformanceData(searchBoxThird.value, searchThird)"
+                  [disabled]="isSearchButtonThirdDisabled"
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
-                  disabled
                 >
                   <i class="material-icons">search</i>
                   Search

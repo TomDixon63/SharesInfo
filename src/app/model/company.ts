@@ -1,7 +1,7 @@
 // company information
 
 export class Company {
-  name: String;
+  name: string;
   description: string;
   exchange: string;
   currency: string;
