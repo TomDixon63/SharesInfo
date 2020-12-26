@@ -6,7 +6,7 @@ import { Component, OnInit, HostBinding } from "@angular/core";
 @Component({
   selector: "app-compare",
   templateUrl: "./compare.component.html",
-  //styleUrls: ['./compare.component.scss']
+  styleUrls: ["./compare.component.scss"],
 })
 export class CompareComponent extends UpgradableComponent implements OnInit {
   //SCSS
@@ -19,12 +19,7 @@ export class CompareComponent extends UpgradableComponent implements OnInit {
   public sharePerfomanceSecond = new SharePerfomance();
   public sharePerfomanceThird = new SharePerfomance();
 
-  //determines which search is selected, function parameter
-  searchFirst: string = "";
-  searchSecond: string = "";
-  searchThird: string = "";
-
-  //determines if search button is disabled
+  //search buttons disabled
   isSearchButtonSecondDisabled = true;
   isSearchButtonThirdDisabled = true;
 
@@ -34,11 +29,13 @@ export class CompareComponent extends UpgradableComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //TODO: error when symbol not found
   //TODO: refactor, move calcs to their own service and improve them
   // share performance data
   public getSharePerformanceData(symbol: string, searchfor: string) {
     this.alphavantageService.getShareMonthlyData(symbol).subscribe((data) => {
       let i = 1;
+      let sharePerfomance = new SharePerfomance();
       let jsonData: any = data["Monthly Time Series"];
 
       for (var item in jsonData) {
@@ -48,69 +45,86 @@ export class CompareComponent extends UpgradableComponent implements OnInit {
             console.log(i + ". " + jsonData[item]["4. close"]);
             // price is close actual month
             let price: number = jsonData[item]["4. close"];
-            this.sharePerfomanceFirst.price = price;
+            //TODO: FF throws an error when .toFixed(2) is applied, price is shown with more than 2 digits
+            sharePerfomance.price = price.toString();
+            sharePerfomance.symbol = symbol.toUpperCase();
             break;
           case 2:
-            this.sharePerfomanceFirst.per1Month = (
+            sharePerfomance.per1Month = (
               ((price - jsonData[item]["4. close"]) /
                 jsonData[item]["4. close"]) *
               100
             ).toFixed(2);
-            console.log("1 m: " + this.sharePerfomanceFirst.per1Month);
+            console.log("1 m: " + sharePerfomance.per1Month);
             break;
           case 26:
-            this.sharePerfomanceFirst.per6Month = (
+            sharePerfomance.per6Month = (
               ((price - jsonData[item]["4. close"]) /
                 jsonData[item]["4. close"]) *
               100
             ).toFixed(2);
-            console.log(
-              "6 m: " + this.sharePerfomanceFirst.per6Month
-            );
+            console.log("6 m: " + sharePerfomance.per6Month);
             break;
           case 52:
-            this.sharePerfomanceFirst.per1Year =
-              (((price - jsonData[item]["4. close"]) /
+            sharePerfomance.per1Year = (
+              ((price - jsonData[item]["4. close"]) /
                 jsonData[item]["4. close"]) *
-              100).toFixed(2);
-            console.log(
-              "1 y: " + this.sharePerfomanceFirst.per1Year
-            );
+              100
+            ).toFixed(2);
+            console.log("1 y: " + sharePerfomance.per1Year);
             break;
           case 156:
-            this.sharePerfomanceFirst.per3Year =
-              (((price - jsonData[item]["4. close"]) /
+            sharePerfomance.per3Year = (
+              ((price - jsonData[item]["4. close"]) /
                 jsonData[item]["4. close"]) *
-              100).toFixed(2);
-            console.log(
-              "3 y: " + this.sharePerfomanceFirst.per3Year
-            );
-            break;
-          case 260:
-            this.sharePerfomanceFirst.per5Year =
-              (((price - jsonData[item]["4. close"]) /
-                jsonData[item]["4. close"]) *
-              100).toFixed(2);
-            console.log(
-              "5 y: " + this.sharePerfomanceFirst.per5Year
-            );
+              100
+            ).toFixed(2);
+            console.log("3 y: " + sharePerfomance.per3Year);
             break;
           default:
             break;
         }
-
         i++;
       }
 
-      //this.shareDetailsFirst.price = data["Monthly Time Series"][0]["04. close"];
-      //this.shareDetailsFirst.open = data["Global Quote"]["02. open"];
-      //this.shareDetailsFirst.high = data["Global Quote"]["03. high"];
-      //this.shareDetailsFirst.low = data["Global Quote"]["04. low"];
-      //this.shareDetailsFirst.price = data["Global Quote"]["05. price"];
-      //this.shareDetailsFirst.change = data["Global Quote"]["09. change"];
-      //this.shareDetailsFirst.changePercent =
-      //  data["Global Quote"]["10. change percent"];
-      //  console.log(this.shareDetailsFirst.price);
+      //determine which performance is up
+      if (
+        !!sharePerfomance.per1Month &&
+        !sharePerfomance.per1Month.includes("-")
+      ) {
+        sharePerfomance.per1MonthUp = true;
+      }
+      if (
+        !!sharePerfomance.per6Month &&
+        !sharePerfomance.per6Month.includes("-")
+      ) {
+        sharePerfomance.per6MonthUp = true;
+      }
+      if (
+        !!sharePerfomance.per1Year &&
+        !sharePerfomance.per1Year.includes("-")
+      ) {
+        sharePerfomance.per1YearUp = true;
+      }
+      if (
+        !!sharePerfomance.per3Year &&
+        !sharePerfomance.per3Year.includes("-")
+      ) {
+        sharePerfomance.per3YearUp = true;
+      }
+     
+      //determine which search is carried out and enable the next search button (only once)
+      if (searchfor === "searchFirst") {
+        this.sharePerfomanceFirst = sharePerfomance;
+        this.isSearchButtonSecondDisabled = false;
+      }
+      if (searchfor === "searchSecond") {
+        this.sharePerfomanceSecond = sharePerfomance;
+        this.isSearchButtonThirdDisabled = false;
+      }
+      if (searchfor === "searchThird") {
+        this.sharePerfomanceThird = sharePerfomance;
+      }
     });
   }
 }

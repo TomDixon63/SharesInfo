@@ -12,7 +12,7 @@
       </base-card-title>
       <base-card-body>
         <form class="form form--basic">
-          <div class="mdl-grid">
+          <div class="mdl-grid" style="margin-left: 20px; margin-right: 20px">
             <div
               class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone form__article"
             >
@@ -33,15 +33,19 @@
               <div style="float: right">
                 <button
                   type="button"
-                  (click)="getSharePerformanceData(searchBoxFirst.value, searchFirst)"
+                  (click)="
+                    getSharePerformanceData(searchBoxFirst.value, 'searchFirst')
+                  "
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
                 >
                   <i class="material-icons">search</i>
                   Search
                 </button>
               </div>
-              <div style="margin-top: 70px">
-                <h5 class="mdl-card__title-text text-color--white">GOOGL</h5>
+              <div  style="margin-top: 90px">
+                <h5 class="mdl-card__title-text text-color--white">
+                  {{ sharePerfomanceFirst.symbol }}
+                </h5>
 
                 <ul class="mdl-list" style="margin-top: 10px">
                   <li class="mdl-list__item list__item--border-top">
@@ -49,19 +53,72 @@
                       >1 Month</span
                     >
                     <span
-                      class="mdl-list__item-secondary-content trending__percent"
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceFirst.per1MonthUp"
                     >
-                      ny
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceFirst.per1MonthUp &&
+                        !!sharePerfomanceFirst.per1Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceFirst.per1Month }} %
                     </span>
                   </li>
+
                   <li class="mdl-list__item list__item--border-top">
                     <span class="mdl-list__item-primary-content list__item-text"
                       >6 Month</span
                     >
                     <span
-                      class="mdl-list__item-secondary-content trending__percent"
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceFirst.per6MonthUp"
                     >
-                      company.country
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceFirst.per6MonthUp &&
+                        !!sharePerfomanceFirst.per6Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceFirst.per6Month }} %
                     </span>
                   </li>
                   <li class="mdl-list__item list__item--border-top">
@@ -69,9 +126,35 @@
                       >1 Year</span
                     >
                     <span
-                      class="mdl-list__item-secondary-content trending__percent"
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceFirst.per1YearUp"
                     >
-                      company.sector
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceFirst.per1YearUp &&
+                        !!sharePerfomanceFirst.per1YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceFirst.per1Year }} %
                     </span>
                   </li>
                   <li class="mdl-list__item list__item--border-top">
@@ -79,18 +162,48 @@
                       >3 Year</span
                     >
                     <span
-                      class="mdl-list__item-secondary-content trending__percent"
-                      >20 USD</span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceFirst.per3YearUp"
                     >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceFirst.per3YearUp &&
+                        !!sharePerfomanceFirst.per3YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceFirst.per3Year }} %
+                    </span>
                   </li>
+
                   <li class="mdl-list__item list__item--border-top">
                     <span class="mdl-list__item-primary-content list__item-text"
-                      >5 Year</span
+                      >Price</span
                     >
                     <span
                       class="mdl-list__item-secondary-content trending__percent"
-                      >15 USD</span
+                      style="width: 30%"
                     >
+                      {{ sharePerfomanceFirst.price }} USD
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -116,13 +229,184 @@
               <div style="float: right">
                 <button
                   type="button"
-                  (click)="getSharePerformanceData(searchBoxSecond.value, searchSecond)"
+                  (click)="
+                    getSharePerformanceData(
+                      searchBoxSecond.value,
+                      'searchSecond'
+                    )
+                  "
                   [disabled]="isSearchButtonSecondDisabled"
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
                 >
                   <i class="material-icons">search</i>
                   Search
                 </button>
+              </div>
+              <div style="margin-top: 90px">
+                <h5 class="mdl-card__title-text text-color--white">
+                  {{ sharePerfomanceSecond.symbol }}
+                </h5>
+
+                <ul class="mdl-list" style="margin-top: 10px">
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >1 Month</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceSecond.per1MonthUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceSecond.per1MonthUp &&
+                        !!sharePerfomanceSecond.per1Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceSecond.per1Month }} %
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >6 Month</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceSecond.per6MonthUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceSecond.per6MonthUp &&
+                        !!sharePerfomanceSecond.per6Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceSecond.per6Month }} %
+                    </span>
+                  </li>
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >1 Year</span
+                    >
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceSecond.per1YearUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceSecond.per1YearUp &&
+                        !!sharePerfomanceSecond.per1YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceSecond.per1Year }} %
+                    </span>
+                  </li>
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >3 Year</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceSecond.per3YearUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceSecond.per3YearUp &&
+                        !!sharePerfomanceSecond.per3YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceSecond.per3Year }} %
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >Price</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceSecond.price }} USD
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -146,13 +430,182 @@
               <div style="float: right">
                 <button
                   type="button"
-                  (click)="getSharePerformanceData(searchBoxThird.value, searchThird)"
+                  (click)="
+                    getSharePerformanceData(searchBoxThird.value, 'searchThird')
+                  "
                   [disabled]="isSearchButtonThirdDisabled"
                   class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
                 >
                   <i class="material-icons">search</i>
                   Search
                 </button>
+              </div>
+
+              <div  style="margin-top: 90px">
+                <h5 class="mdl-card__title-text text-color--white">
+                  {{ sharePerfomanceThird.symbol }} 
+                </h5>
+
+                <ul class="mdl-list" style="margin-top: 10px">
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >1 Month</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceThird.per1MonthUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceThird.per1MonthUp &&
+                        !!sharePerfomanceThird.per1Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceThird.per1Month }} %
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >6 Month</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceThird.per6MonthUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceThird.per6MonthUp &&
+                        !!sharePerfomanceThird.per6Month
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceThird.per6Month }} %
+                    </span>
+                  </li>
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >1 Year</span
+                    >
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceThird.per1YearUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceThird.per1YearUp &&
+                        !!sharePerfomanceThird.per1YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceThird.per1Year }} %
+                    </span>
+                  </li>
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >3 Year</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="sharePerfomanceThird.per3YearUp"
+                    >
+                      <i
+                        class="material-icons trending__arrow-up"
+                        role="presentation"
+                        >arrow_drop_up</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content"
+                      *ngIf="
+                        !sharePerfomanceThird.per3YearUp &&
+                        !!sharePerfomanceThird.per3YearUp
+                      "
+                    >
+                      <i
+                        class="material-icons trending__arrow-down"
+                        role="presentation"
+                        >arrow_drop_down</i
+                      >
+                    </span>
+
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceThird.per3Year }} %
+                    </span>
+                  </li>
+
+                  <li class="mdl-list__item list__item--border-top">
+                    <span class="mdl-list__item-primary-content list__item-text"
+                      >Price</span
+                    >
+                    <span
+                      class="mdl-list__item-secondary-content trending__percent"
+                      style="width: 30%"
+                    >
+                      {{ sharePerfomanceThird.price }} USD
+                    </span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
