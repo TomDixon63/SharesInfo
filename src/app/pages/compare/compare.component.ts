@@ -29,11 +29,26 @@ export class CompareComponent extends UpgradableComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //TODO: alpha does not provide an errorcode in error response, just a text, so here a primitive error handling, solution to be found
   //TODO: error when symbol not found
   //TODO: refactor, move calcs to their own service and improve them
   // share performance data
   public getSharePerformanceData(symbol: string, searchfor: string) {
+
+    
+    if (symbol.length < 1) {
+      window.alert("symbol");
+      return;
+    }
+
     this.alphavantageService.getShareMonthlyData(symbol).subscribe((data) => {
+      let n: string = JSON.stringify(data);
+
+      if (n.includes("Error")) {
+        window.alert("No data available");
+        return;
+      }
+
       let i = 1;
       let sharePerfomance = new SharePerfomance();
       let jsonData: any = data["Monthly Time Series"];
@@ -112,7 +127,7 @@ export class CompareComponent extends UpgradableComponent implements OnInit {
       ) {
         sharePerfomance.per3YearUp = true;
       }
-     
+
       //determine which search is carried out and enable the next search button (only once)
       if (searchfor === "searchFirst") {
         this.sharePerfomanceFirst = sharePerfomance;
