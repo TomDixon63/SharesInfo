@@ -6,8 +6,8 @@
   >
     <div>
       <span class="text-color--gray">
-        Alpha Vantage does not provide all data when using a free api key. Thus
-        the limitation on 10. See:
+        Alpha Vantage does not provide all data when using a free api key and
+        only a few requests/min are allowed. Thus the limitation on 4. See:
         <a target="_blank" href="https://www.alphavantage.co/documentation/"
           >Alpha Vantage</a
         >.</span
@@ -15,27 +15,26 @@
     </div>
   </div>
 
-  <div
-    class="mdl-cell mdl-cell--6-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
-  >
+  <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
     <base-card>
       <base-card-title>
-        <h2 class="mdl-card__title-text">DOW JONES - Top 10 Market Cap</h2>
+        <h2 class="mdl-card__title-text">DOW JONES - Top 4 Market Cap</h2>
         <div
           *baseTooltip="
             'The Dow Jones Industrial Average consists of the 30 most important market-leading companies on the American stock exchange and reflects their growth.'
           "
           id="tt1"
           class="icon material-icons color-text--teal"
-          style="margin-left: 10px"
+          style="margin-left: 10px; font-size:25px"
         >
           info
         </div>
       </base-card-title>
       <base-card-body class="no-padding">
         <table
-          class="mdl-data-table mdl-js-data-table bordered-table"
+          class="mdl-data-table mdl-js-data-table simple-table"
           style="width: 99%"
+          *ngIf="dowJonesList?.length"
         >
           <thead>
             <tr>
@@ -50,22 +49,45 @@
           <tbody>
             <tr *ngFor="let share of dowJonesList">
               <td class="mdl-data-table__cell--non-numeric">
-                {{ share.symbol }}
+                {{ share.name }} ({{ share.symbol }})
               </td>
               <td class="mdl-data-table__cell--non-numeric">
-                {{ share.open }}
+                {{ share.price | number }} USD
               </td>
               <td class="mdl-data-table__cell--non-numeric">
-                {{ share.price }}
+                <span
+                  class="mdl-list__item-secondary-content"
+                  *ngIf="!share.change.includes('-')"
+                >
+                  <i
+                    class="material-icons trending__arrow-up"
+                    role="presentation"
+                    >arrow_drop_up</i
+                  >
+                </span>
+
+                <span
+                  class="mdl-list__item-secondary-content"
+                  *ngIf="share.change.includes('-')"
+                >
+                  <i
+                    class="material-icons trending__arrow-down"
+                    role="presentation"
+                    >arrow_drop_down</i
+                  >
+                </span>
               </td>
+
               <td class="mdl-data-table__cell--non-numeric">
-                {{ share.previousClose }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.change }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.changePercent }}
+                <span
+                  class="{{
+                    share.changePercent.includes('-')
+                      ? 'color-text--red'
+                      : 'color-text--teal'
+                  }}"
+                >
+                  {{ share.changePercent }}
+                </span>
               </td>
               <td class="mdl-data-table__cell--non-numeric">
                 <button
@@ -76,6 +98,16 @@
                   Details
                 </button>
               </td>
+
+              <td class="mdl-data-table__cell--non-numeric">
+                <button
+                  type="button"
+                  (click)="navigateToDetailsPage(share.symbol)"
+                  class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+                >
+                  Watch
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -83,90 +115,103 @@
     </base-card>
   </div>
 
-  <div
-    class="mdl-cell mdl-cell--6-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
-  >
+  <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
     <base-card>
       <base-card-title>
-        <h2 class="mdl-card__title-text">NASDAQ 100 - Top 10 Market Cap</h2>
+        <h2 class="mdl-card__title-text">WATCHLIST</h2>
         <div
           *baseTooltip="
-            'The Nasdaq 100 includes the shares of the 100 largest American and international companies as measured by their market capitalization which do not come from the financial sector.'
+            'List of shares to watch. Add shares using WATCH button'
           "
-          id="tt2"
+          id="tt3"
           class="icon material-icons color-text--teal"
-          style="margin-left: 10px"
+          style="margin-left: 10px; font-size:25px"
         >
           info
         </div>
       </base-card-title>
       <base-card-body class="no-padding">
-        <table
-          class="mdl-data-table mdl-js-data-table bordered-table"
-          style="width: 99%"
-        >
-          <thead>
-            <tr>
-              <th
-                *ngFor="let header of headers"
-                class="mdl-data-table__cell--non-numeric"
+      <table
+        class="mdl-data-table mdl-js-data-table simple-table"
+        style="width: 99%"
+        *ngIf="watchList?.length"
+      >
+        <thead>
+          <tr>
+            <th
+              *ngFor="let header of headers"
+              class="mdl-data-table__cell--non-numeric"
+            >
+              {{ header }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let share of dowJonesList">
+            <td class="mdl-data-table__cell--non-numeric">
+              {{ share.name }} ({{ share.symbol }})
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              {{ share.price | number }} USD
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <span
+                class="mdl-list__item-secondary-content"
+                *ngIf="!share.change.includes('-')"
               >
-                {{ header }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let share of nasdaqList">
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.symbol }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.open }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.price }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.previousClose }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.change }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.changePercent }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                <button
-                  type="button"
-                  (click)="navigateToDetailsPage(share.symbol)"
-                  class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+                <i
+                  class="material-icons trending__arrow-up"
+                  role="presentation"
+                  >arrow_drop_up</i
                 >
-                  Details
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </base-card-body>
-    </base-card>
-  </div>
+              </span>
 
-  <div
-    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
-  >
-    <base-card>
-      <base-card-title>
-        <h2 class="mdl-card__title-text">WATCHLIST</h2>
-        <div
-          *baseTooltip="'You can add a share from the detail view.'"
-          id="tt3"
-          class="icon material-icons color-text--teal"
-          style="margin-left: 10px"
-        >
-          info
-        </div>
-      </base-card-title>
-      <base-card-body> my content </base-card-body>
+              <span
+                class="mdl-list__item-secondary-content"
+                *ngIf="share.change.includes('-')"
+              >
+                <i
+                  class="material-icons trending__arrow-down"
+                  role="presentation"
+                  >arrow_drop_down</i
+                >
+              </span>
+            </td>
+
+            <td class="mdl-data-table__cell--non-numeric">
+              <span
+                class="{{
+                  share.changePercent.includes('-')
+                    ? 'color-text--red'
+                    : 'color-text--teal'
+                }}"
+              >
+                {{ share.changePercent }}
+              </span>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <button
+                type="button"
+                (click)="navigateToDetailsPage(share.symbol)"
+                class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+              >
+                Details
+              </button>
+            </td>
+
+            <td class="mdl-data-table__cell--non-numeric">
+              <button
+                type="button"
+                (click)="navigateToDetailsPage(share.symbol)"
+                class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+              >
+                Watch
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </base-card-body>
     </base-card>
   </div>
 </div>

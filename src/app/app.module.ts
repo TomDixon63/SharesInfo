@@ -11,12 +11,11 @@ import { DashboardModule } from './pages/dashboard';
 import { SearchModule} from './pages/search';
 import { DetailsModule } from './pages/details/details.module';
 import { CompareModule } from './pages/compare';
-import { AlertModule } from './components/alert/alert.module';
+import { TestModule } from './pages/test/test.module';
 
- 
 @NgModule({
   declarations: [
-    AppComponent 
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +25,8 @@ import { AlertModule } from './components/alert/alert.module';
     SearchModule,
     DetailsModule,
     CompareModule,
-    AlertModule,
-    HttpClientModule
+    TestModule,
+    HttpClientModule,
   ],
   providers: [
     AuthService,

@@ -38,7 +38,7 @@
               >Price</span
             >
             <span class="mdl-list__item-secondary-content trending__percent"
-              >{{ shareDetails.price }} USD</span
+              >{{ shareDetails.price | number}} USD</span
             >
           </li>
           <li class="mdl-list__item list__item--border-top">
@@ -70,7 +70,7 @@
               >52 Week High</span
             >
             <span class="mdl-list__item-secondary-content trending__percent"
-              >{{ company.yearHigh }} USD</span
+              >{{ company.yearHigh | number }} USD</span
             >
           </li>
           <li class="mdl-list__item list__item--border-top">
@@ -78,7 +78,7 @@
               >52 Week Low</span
             >
             <span class="mdl-list__item-secondary-content trending__percent"
-              >{{ company.yearLow }} USD</span>
+              >{{ company.yearLow | number }} USD</span>
           </li>
         </ul>
       </base-card-body>
@@ -88,11 +88,10 @@
   <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
     <base-card>
       <base-card-title>
-      <h2 class="mdl-card__title-text"> 52 Weeks Chart</h2>
+      <h2 class="mdl-card__title-text"> 52 Week Chart</h2>
       </base-card-title>
       <base-card-body> 
       <app-chart></app-chart>
-
     </base-card-body>
     </base-card>
   </div>

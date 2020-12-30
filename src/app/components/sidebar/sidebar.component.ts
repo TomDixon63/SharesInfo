@@ -13,5 +13,6 @@ export class SidebarComponent extends BaseSidebarComponent {
     { name: 'Dashboard', link: '/app/dashboard', icon: 'dashboard' },
     { name: 'Search', link: '/app/search', icon: 'search' },
     { name: 'Compare', link: '/app/compare', icon: 'list' },
+    { name: 'TestPage', link: '/app/test', icon: 'list' },
   ];
 }

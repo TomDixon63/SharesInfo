@@ -1,4 +1,4 @@
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { ShareDetails } from "./../../model/share-details";
 import { AlphavantageService } from "app/services/alphavantage/alphavantage.service";
@@ -8,6 +8,7 @@ import { UpgradableComponent } from "theme/components/upgradable";
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
+  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent extends UpgradableComponent {
   //SCSS
@@ -15,49 +16,23 @@ export class DashboardComponent extends UpgradableComponent {
   @HostBinding("class.mdl-grid--no-spacing")
   public readonly mdlGridNoSpacing = true;
 
-  //dow jones top 10 by market cap, alpha does not provide more than 10 when free api key
-  //private dowJonesSymbols = ["AAPL", "MSFT", "V", "WMT", "WMT", "JPM", "PG", "UNH", "DIS", "HD"];
-  private dowJonesSymbols = ["AAPL", "MSFT"];
+  //dow jones top 4 by market cap, alpha does allow only a few requests/min when free api key
+  private dowJonesSymbols = ["AAPL", "MSFT", "V", "WMT"];
+  
 
-  //nasdaq 100 top 10 by market cap, alpha does not provide more than 10 when free api key
-  /*
-  private nasdaqSymbols = [
-    "AAPL",
-    "AMZN",
-    "GOOG",
-    "GOOGL",
-    "FB",
-    "ADBE",
-    "CMCSA",
-    "CSCO",
-    "AVGO",
-    " COST",
-  ];
-  */
-
-  private nasdaqSymbols = [
-    "AAPL",
-    "AMZN",
-  ];
-
-  jsonData: any;
-
-  //table headers for all 3 tables
+  //table headers for all  tables
   public headers = [
-    "Symbol",
-    "Open",
+    "Name / Symbol",
     "Price",
-    "Previous Close",
     "Change",
-    "Change perecent",
-    "  ",
+    "Change percent",
   ];
 
   //list with dow jones shares
   public dowJonesList: ShareDetails[] = [];
 
-  //list with nasdaq shares
-  public nasdaqList: ShareDetails[] = [];
+  //watchlist
+  public watchList: ShareDetails[] = [];
 
   constructor(
     private alphavantageService: AlphavantageService,
@@ -67,50 +42,35 @@ export class DashboardComponent extends UpgradableComponent {
     super();
   }
 
+  // get dow jones shares from alpha on app start, after from local storage
+  // add watchList to local storage on app start
   ngOnInit() {
-   //this.getDowJones();
-   //this.getNasdaq();
+    if (localStorage.getItem("dowJonesList")) {
+      this.dowJonesList = JSON.parse(localStorage.getItem("dowJonesList"));
+    } else {
+      this.getDowJones();
+    }
+    if (localStorage.getItem("watchList")) {
+      this.watchList = JSON.parse(localStorage.getItem("watchList"));
+    } else {
+      this.getDowJones();
+      localStorage.setItem("watchList", JSON.stringify(this.watchList));
+    }
   }
 
-  //TODO: refactor, one mapping method for dow jones and nasdaq
   //get dow jones shares
-  private getDowJones(){
+  private getDowJones() {
     for (const symbol of this.dowJonesSymbols) {
       let shareDetails = new ShareDetails();
       this.alphavantageService.getShareDetails(symbol).subscribe((data) => {
         shareDetails.symbol = data["Global Quote"]["01. symbol"];
-        shareDetails.open = data["Global Quote"]["02. open"];
-        shareDetails.high = data["Global Quote"]["03. high"];
-        shareDetails.low = data["Global Quote"]["04. low"];
+        shareDetails.name = this.symbol2NameMapper(symbol);
         shareDetails.price = data["Global Quote"]["05. price"];
-        shareDetails.volume = data["Global Quote"]["06. volume"];
-        shareDetails.latestTradingDay =
-          data["Global Quote"]["07. latest trading day"];
-        shareDetails.previousClose = data["Global Quote"]["08. previous close"];
         shareDetails.change = data["Global Quote"]["09. change"];
         shareDetails.changePercent = data["Global Quote"]["10. change percent"];
         this.dowJonesList.push(shareDetails);
-      });
-    }
-  }
-
-  //get nasdaq shares
-  private getNasdaq(){
-    for (const symbol of this.nasdaqSymbols) {
-      let shareDetails = new ShareDetails();
-      this.alphavantageService.getShareDetails(symbol).subscribe((data) => {
-        shareDetails.symbol = data["Global Quote"]["01. symbol"];
-        shareDetails.open = data["Global Quote"]["02. open"];
-        shareDetails.high = data["Global Quote"]["03. high"];
-        shareDetails.low = data["Global Quote"]["04. low"];
-        shareDetails.price = data["Global Quote"]["05. price"];
-        shareDetails.volume = data["Global Quote"]["06. volume"];
-        shareDetails.latestTradingDay =
-          data["Global Quote"]["07. latest trading day"];
-        shareDetails.previousClose = data["Global Quote"]["08. previous close"];
-        shareDetails.change = data["Global Quote"]["09. change"];
-        shareDetails.changePercent = data["Global Quote"]["10. change percent"];
-        this.nasdaqList.push(shareDetails);
+        //add to local storage
+        localStorage.setItem("dowJonesList", JSON.stringify(this.dowJonesList));
       });
     }
   }
@@ -126,5 +86,26 @@ export class DashboardComponent extends UpgradableComponent {
   // navigate back
   public navigateBack() {
     this.location.back();
+  }
+
+  // maps symbol to name
+  // this is needed to avoid a second request to alpha to determine the name,
+  // as "Global Quote"  doesn't contain it
+  private symbol2NameMapper(symbol: string) {
+    if (symbol.length == 0) {
+      return;
+    }
+    if (symbol.includes("AAPL")) {
+      return "Apple";
+    }
+    if (symbol.includes("MSFT")) {
+      return "Microsoft";
+    }
+    if (symbol.includes("V")) {
+      return "Visa";
+    }
+    if (symbol.includes("WMT")) {
+      return "Wallmart";
+    }
   }
 }

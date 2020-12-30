@@ -2,41 +2,36 @@
   class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
 >
   <div
-    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
+    class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone"
   >
-    <base-card>
-      <base-card-title>
-        <h2 class="mdl-card__title-text">
-          Search share 
-        </h2>
-      </base-card-title>
-      <base-card-body>
-        <div
-          class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
-        >
-          <input
-            #searchBox
-            class="mdl-textfield__input"
-            type="text"
-            id="symbol"
-          />
-          <label class="mdl-textfield__label" for="symbol">Enter symbol (example: GOOGL)</label>
-        </div>
-        <div class="mdl-layout-spacer"></div>
-        <button
-          type="button"
-          (click)="generateSuggestionsList(searchBox.value)"
-          class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-          style="float: right"
-        >
-          Search
-        </button>
-      </base-card-body>
-    </base-card>
+    <h2 class="mdl-card__title-text" style="margin-top: 20px;">Search share</h2>
+
+    <div
+      class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
+    >
+      <input #searchBox class="mdl-textfield__input" type="text" id="symbol" />
+      <label class="mdl-textfield__label" for="symbol"
+        >Enter symbol (example: GOOGL)</label
+      >
+    </div>
+
+    <button
+      type="button"
+      (click)="generateSuggestionsList(searchBox.value)"
+      class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+      style="float: right"
+    >
+      <i class="material-icons">search</i>
+      Search
+    </button>
   </div>
 
   <div
-    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
+    class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
+  ></div>
+
+  <div
+    class="mdl-cell mdl-cell--8-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
   >
     <base-card>
       <base-card-title>
@@ -44,7 +39,8 @@
       </base-card-title>
       <base-card-body class="no-padding">
         <table
-          class="mdl-data-table mdl-js-data-table bordered-table"
+          class="mdl-data-table mdl-js-data-table simple-table"
+          *ngIf="suggestionsList?.length"
           style="width: 99%"
         >
           <thead>
@@ -72,27 +68,28 @@
                 {{ share.region }}
               </td>
               <td class="mdl-data-table__cell--non-numeric">
-                {{ share.marketOpen }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.marketClose }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
-                {{ share.timezone }}
-              </td>
-              <td class="mdl-data-table__cell--non-numeric">
                 {{ share.currency }}
               </td>
               <td class="mdl-data-table__cell--non-numeric">
                 {{ share.matchScore }}
               </td>
+              
               <td class="mdl-data-table__cell--non-numeric">
                 <button
                   type="button"
                   (click)="navigateToDetailsPage(share.symbol)"
                   class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
                 >
-                 Details
+                  Details
+                </button>
+              </td>
+              <td class="mdl-data-table__cell--non-numeric">
+                <button
+                  type="button"
+                  (click)="navigateToDetailsPage(share.symbol)"
+                  class="mdl-button mdl-js-button mdl-js-ripple-effect button--colored color--light-blue"
+                >
+                  Watch
                 </button>
               </td>
             </tr>

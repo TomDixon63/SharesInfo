@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 import { AuthService } from '@services/*';
 
 @Component({
@@ -12,7 +13,8 @@ export class CommonLayoutComponent implements OnInit {
   public user;
 
   constructor(private authService: AuthService,
-              private router: Router) {}
+              private router: Router
+              ) {}
 
   public ngOnInit() {
     this.authService.userData.subscribe(user => this.user = user ? user : {

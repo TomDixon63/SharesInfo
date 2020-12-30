@@ -1,5 +1,6 @@
 //share details information
 export class ShareDetails {
+  name: string;  
   symbol: string;
   open: number;
   high: number;

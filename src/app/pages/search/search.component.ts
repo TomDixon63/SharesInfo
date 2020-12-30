@@ -28,12 +28,8 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
     "Name",
     "Type",
     "Region",
-    "Marketopen",
-    "Marketclose",
-    "Timezone",
     "Currency",
     "Matchscore",
-    "  ",
   ];
   public suggestionsList: ShareInfo[] = [];
 
@@ -56,9 +52,6 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
         const name = this.jsonData[item]["2. name"];
         const type = this.jsonData[item]["3. type"];
         const region = this.jsonData[item]["4. region"];
-        const marketOpen = this.jsonData[item]["5. marketOpen"];
-        const marketClose = this.jsonData[item]["6. marketClose"];
-        const timezone = this.jsonData[item]["7. timezone"];
         const currency = this.jsonData[item]["8. currency"];
         const matchScore = this.jsonData[item]["9. matchScore"];
         let shareInfo: ShareInfo = new ShareInfo(
@@ -66,9 +59,6 @@ export class SearchComponent extends UpgradableComponent implements OnInit {
           name,
           type,
           region,
-          marketOpen,
-          marketClose,
-          timezone,
           currency,
           matchScore
         );

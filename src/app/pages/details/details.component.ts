@@ -92,4 +92,5 @@ export class DetailsComponent extends UpgradableComponent implements OnInit {
   public navigateBack() {
     this.location.back();
   }
+
 }

@@ -1,3 +1,4 @@
+import { TestComponent } from './pages/test/test.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -22,6 +23,7 @@ import { DetailsComponent } from './pages/details/details.component';
           { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
           { path: 'search', component: SearchComponent, pathMatch: 'full' },
           { path: 'compare', component: CompareComponent, pathMatch: 'full' },
+          { path: 'test', component: TestComponent, pathMatch: 'full' },
           { path: 'details', component: DetailsComponent, pathMatch: 'full' },
           { path: '**', component: ErrorComponent, pathMatch: 'full' },
         ] },
