@@ -1,0 +1,48 @@
+.alert {
+  position: relative;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-weight: 600;
+  color:white;
+}
+
+.alert-success{
+    background-color: green;
+}
+
+.alert-danger{
+    background-color: red;
+}
+
+.alert-info{
+    background-color: teal;
+}
+
+.alert-warning{
+    background-color: orange;
+}
+
+.alert-heading {
+  color: inherit;
+}
+
+.alert-link {
+  font-weight: red;
+}
+
+.alert-dismissible {
+  padding-right: 10px;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 40px;
+  color: inherit;
+  cursor: pointer;
+}

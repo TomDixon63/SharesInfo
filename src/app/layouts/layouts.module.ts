@@ -9,6 +9,7 @@ import { SidebarComponent } from 'app/components/sidebar';
 import { ThemeModule } from 'theme';
 import { BlankLayoutComponent } from './blank-layout';
 import { CommonLayoutComponent } from './common-layout';
+import { AlertComponent } from './../components/alert/alert.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { CommonLayoutComponent } from './common-layout';
     SidebarComponent,
     MessageMenuComponent,
     NotificationMenuComponent,
+    AlertComponent
   ],
   exports: [
     CommonLayoutComponent,

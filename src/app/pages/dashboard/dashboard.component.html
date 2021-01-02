@@ -1,6 +1,7 @@
 <div
   class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
 >
+
   <div
     class="mdl-cell mdl-cell--12-col-desktop mdl-cell--7-col-tablet mdl-cell--4-col-phone"
   >
@@ -102,10 +103,10 @@
               <td class="mdl-data-table__cell--non-numeric">
                 <button
                   type="button"
-                  (click)="navigateToDetailsPage(share.symbol)"
+                  (click)="addToWatchList(share)"
                   class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
                 >
-                  Watch
+                Watch
                 </button>
               </td>
             </tr>
@@ -147,7 +148,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let share of dowJonesList">
+          <tr *ngFor="let share of watchList">
             <td class="mdl-data-table__cell--non-numeric">
               {{ share.name }} ({{ share.symbol }})
             </td>
@@ -202,10 +203,10 @@
             <td class="mdl-data-table__cell--non-numeric">
               <button
                 type="button"
-                (click)="navigateToDetailsPage(share.symbol)"
+                (click)="removeFromWatchList(share.symbol)"
                 class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
               >
-                Watch
+                Remove
               </button>
             </td>
           </tr>

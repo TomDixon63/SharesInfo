@@ -1,30 +1,33 @@
 <div
   class="mdl-grid mdl-cell mdl-cell--12-col-desktop mdl-cell--12-col-tablet mdl-cell--4-col-phone mdl-cell--top"
 >
+
   <div
     class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
   >
-    <base-card>
-      <base-card-body>
-        <button
-          type="button"
-          (click)="navigateBack()"
-          class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-        >
-          Back
-        </button>
-        <button
-          type="button"
-          class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
-          style="float: right"
-        >
-          Add to Watchlist
-        </button>
-      </base-card-body>
-    </base-card>
+    <button
+      type="button"
+      (click)="navigateBack()"
+      class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+      style="float: left"
+    >
+      <i class="material-icons">keyboard_arrow_left</i>
+
+      Back
+    </button>
+    <button
+      type="button"
+      (click)="addToWatchList()"
+      class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+      style="margin-left: 50px"
+    >
+      Watch
+    </button>
   </div>
 
-  <div class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+  <div
+    class="mdl-cell mdl-cell--4-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone"
+  >
     <base-card>
       <base-card-title>
         <h2 class="mdl-card__title-text">
@@ -38,7 +41,7 @@
               >Price</span
             >
             <span class="mdl-list__item-secondary-content trending__percent"
-              >{{ shareDetails.price | number}} USD</span
+              >{{ shareDetails.price | number }} USD</span
             >
           </li>
           <li class="mdl-list__item list__item--border-top">
@@ -78,21 +81,24 @@
               >52 Week Low</span
             >
             <span class="mdl-list__item-secondary-content trending__percent"
-              >{{ company.yearLow | number }} USD</span>
+              >{{ company.yearLow | number }} USD</span
+            >
           </li>
         </ul>
       </base-card-body>
     </base-card>
   </div>
 
-  <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+  <div
+    class="mdl-cell mdl-cell--8-col-desktop mdl-cell--4-col-tablet mdl-cell--2-col-phone"
+  >
     <base-card>
       <base-card-title>
-      <h2 class="mdl-card__title-text"> 52 Week Chart</h2>
+        <h2 class="mdl-card__title-text">52 Week Chart</h2>
       </base-card-title>
-      <base-card-body> 
-      <app-chart></app-chart>
-    </base-card-body>
+      <base-card-body>
+        <app-chart></app-chart>
+      </base-card-body>
     </base-card>
   </div>
 

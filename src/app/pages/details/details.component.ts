@@ -1,35 +1,45 @@
+import { AlertService } from "./../../components/alert/alert.service";
+import { UtilService } from "./../../services/util/util.service";
+import { DatabaseService } from "./../../services/database/database.service";
 import { Component, HostBinding, OnInit } from "@angular/core";
 import { UpgradableComponent } from "theme/components/upgradable";
 import { ActivatedRoute } from "@angular/router";
 import { Company } from "./../../model/company";
 import { ShareDetails } from "./../../model/share-details";
 import { AlphavantageService } from "./../../services/alphavantage/alphavantage.service";
-import { Location } from '@angular/common';
+import { Location } from "@angular/common";
 
 @Component({
   selector: "app-details",
   templateUrl: "./details.component.html",
 })
 export class DetailsComponent extends UpgradableComponent implements OnInit {
-  //SCSS
+  // SCSS
   @HostBinding("class.mdl-grid") public readonly mdlGrid = true;
   @HostBinding("class.mdl-grid--no-spacing")
   public readonly mdlGridNoSpacing = true;
 
-  jsonData: any;
+  // alert options
+  public options = {
+    autoClose: false,
+    keepAfterRouteChange: false,
+  };
 
   // symbol from request parameter (example: GOOGL)
   symbol: string = "";
 
-  //share details
+  // share details
   public shareDetails = new ShareDetails();
 
-  //company information
+  // company information
   public company = new Company();
 
   constructor(
     private alphavantageService: AlphavantageService,
     private route: ActivatedRoute,
+    private databaseService: DatabaseService,
+    private alertService: AlertService,
+    private utilService: UtilService,
     private location: Location
   ) {
     super();
@@ -49,28 +59,27 @@ export class DetailsComponent extends UpgradableComponent implements OnInit {
     });
   }
 
-  // TODO: create json mapper service, json2ShareDetails
   // share details
+  // if  more > 5 requests/min, show alert with the alpha message
   private getShareDetails() {
     this.alphavantageService.getShareDetails(this.symbol).subscribe((data) => {
-      this.shareDetails.symbol = data["Global Quote"]["01. symbol"];
-      this.shareDetails.open = data["Global Quote"]["02. open"];
-      this.shareDetails.high = data["Global Quote"]["03. high"];
-      this.shareDetails.low = data["Global Quote"]["04. low"];
-      this.shareDetails.price = data["Global Quote"]["05. price"];
-      this.shareDetails.volume = data["Global Quote"]["06. volume"];
-      this.shareDetails.latestTradingDay =
-        data["Global Quote"]["07. latest trading day"];
-      this.shareDetails.previousClose =
-        data["Global Quote"]["08. previous close"];
-      this.shareDetails.change = data["Global Quote"]["09. change"];
-      this.shareDetails.changePercent =
-        data["Global Quote"]["10. change percent"];
+      const note: string = JSON.stringify(data);
+      if (!note.includes("Note")) {
+        this.shareDetails = this.utilService.globalQuote2ShareDetailsMapper(
+          data
+        );
+      } else {
+        this.alertService.warn(
+          "Alpha Vantage says: " +
+            note +
+            " - SHARESINFO says: Keep calm and try again in a minute :-)"
+        );
+      }
     });
   }
 
   // TODO: create json mapper service, json2CompanyInfo
-  //company info
+  // company info
   private getCompanyInfo() {
     this.alphavantageService.getCompanyInfo(this.symbol).subscribe((data) => {
       this.company.name = data["Name"];
@@ -93,4 +102,8 @@ export class DetailsComponent extends UpgradableComponent implements OnInit {
     this.location.back();
   }
 
+  // add share to watchlist
+  public addToWatchList() {
+    this.databaseService.addToWatchList(this.shareDetails);
+  }
 }

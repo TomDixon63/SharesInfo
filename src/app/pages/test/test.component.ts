@@ -1,5 +1,6 @@
+import { AlertService } from './../../components/alert/alert.service';
 import { UpgradableComponent } from 'theme/components/upgradable';
-import { Component, OnInit, Inject, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-test',
@@ -12,8 +13,14 @@ export class TestComponent extends UpgradableComponent implements OnInit {
    @HostBinding("class.mdl-grid--no-spacing")
    public readonly mdlGridNoSpacing = true;
  
+   //alert options
+   public  options = {
+    autoClose: false,
+    keepAfterRouteChange: false
+};
 
-  constructor(){
+
+  constructor(public alertService: AlertService){
     super();
   }
  
