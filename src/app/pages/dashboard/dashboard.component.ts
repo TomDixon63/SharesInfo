@@ -7,6 +7,7 @@ import { ShareDetails } from "./../../model/share-details";
 import { AlphavantageService } from "app/services/alphavantage/alphavantage.service";
 import { Component, HostBinding } from "@angular/core";
 import { UpgradableComponent } from "theme/components/upgradable";
+import { exit } from "process";
 
 @Component({
   selector: "app-dashboard",
@@ -64,19 +65,28 @@ export class DashboardComponent extends UpgradableComponent {
   }
 
   // get dow jones shares and add them to local storage
-  // if  more > 5 requests/min, show alert with the alpha message 
+  // if  more > 5 requests/min, show alert with the alpha message
   private getDowJones() {
     for (const symbol of this.dowJonesSymbols) {
       this.alphavantageService.getShareDetails(symbol).subscribe((data) => {
-        const note: string = JSON.stringify(data);
-        console.log(note);
-        if (!note.includes("Note")) {
+        const result: string = JSON.stringify(data);
+        console.log(result);
+        if (
+          result.includes("Error") ||
+          result.includes("Information") ||
+          result.includes("Note")
+        ) {
+          this.alertService.warn(
+            "Alpha Vantage says: " +
+              result +
+              " - SHARESINFO says: Keep calm and try again in a minute :-)"
+          );
+          
+        } else {
           this.dowJonesList.push(
             this.utilService.globalQuote2ShareDetailsMapper(data)
           );
           this.databaseService.setDowJonesList(this.dowJonesList);
-        } else {
-          this.alertService.warn("Alpha Vantage says: " + note + " - SHARESINFO says: Keep calm and try again in a minute :-)");
         }
       });
     }
@@ -99,13 +109,13 @@ export class DashboardComponent extends UpgradableComponent {
   public addToWatchList(share: ShareDetails) {
     this.databaseService.addToWatchList(share);
     this.watchList = this.databaseService.getWatchList();
-    this.alertService.info("Share added to watchlist.")
+    this.alertService.info("Share added to watchlist.");
   }
 
   // remove share from watchlist
   public removeFromWatchList(symbol: string) {
     this.databaseService.removeFromWatchList(symbol);
     this.watchList = this.databaseService.getWatchList();
-    this.alertService.info("Share removed from watchlist.")
+    this.alertService.info("Share removed from watchlist.");
   }
 }

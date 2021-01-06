@@ -1,3 +1,5 @@
+import { LoginModule } from './pages/login/login.module';
+import { LoginComponent } from './pages/login/login.component';
 import { TestComponent } from './pages/test/test.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -18,7 +20,7 @@ import { DetailsComponent } from './pages/details/details.component';
   imports: [
     RouterModule.forRoot(
       [
-        { path: '', redirectTo: 'app/dashboard', pathMatch: 'full' },
+        { path: '', component: LoginComponent, pathMatch: 'full' },
         { path: 'app', component: CommonLayoutComponent, children: [
           { path: 'dashboard', component: DashboardComponent, pathMatch: 'full' },
           { path: 'search', component: SearchComponent, pathMatch: 'full' },

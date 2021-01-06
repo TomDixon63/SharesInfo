@@ -1,7 +1,9 @@
 @import '~theme/helpers';
 
 :host {
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10.0em;
   display: flex;
 
   .mdl-button {
@@ -10,11 +12,11 @@
 
   font-family: Roboto, Helvetica, sans-serif;
   font-size: 1rem;
-
+  
   .mdl-card__blank-layout-card.mdl-card {
     max-width: 450px;
     margin: auto;
-
+    
     .mdl-card__supporting-text {
       min-height: inherit;
       width: 100%;

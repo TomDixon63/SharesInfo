@@ -1,6 +1,31 @@
 <div
   class="mdl-cell mdl-cell--12-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone"
 >
+  <base-progress
+    color="orange"
+    indeterminate
+    *ngIf="isLoading"
+  ></base-progress>
+
+  <br/>
+  <br/>
+
+  <button
+    type="button"
+    class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+    (click)="progressStart()"
+  >
+    Start
+  </button>
+
+  <button
+    type="button"
+    class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+    (click)="progressStop()"
+  >
+    Stop
+  </button>
+
   <h1>Alerts</h1>
   <button
     type="button"
@@ -34,5 +59,3 @@
     Clear
   </button>
 </div>
-
-

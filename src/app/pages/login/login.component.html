@@ -1,0 +1,72 @@
+
+
+<div class="mdl-card mdl-card__blank-layout-card mdl-shadow--2dp">
+  <div class="mdl-card__supporting-text color--dark-gray">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+        <span class="blank-layout-card-name text-color--white">SHARESINFO</span>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+        <span class="text-color--white"
+          >Enter your Alphavantage API key:</span
+        >
+      </div>
+      <form
+        class="login-form"
+        style="width:100%;"
+        [formGroup]="loginForm"
+        (submit)="login()"
+        autocomplete="off"
+        novalidate
+      >
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+          <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label full-size"
+            [class.is-invalid]="
+              apikey.invalid && (apikey.dirty || apikey.touched)
+            "
+            [class.is-valid]="apikey.valid && (apikey.dirty || apikey.touched)"
+          >
+            <input
+              formControlName="apikey"
+              (change)="onInputChange($event)"
+              class="mdl-textfield__input"
+              type="text"
+              id="apikey"
+            />
+            <label class="mdl-textfield__label" for="apikey">apikey</label>
+
+            <div *ngIf="apikey.invalid && (apikey.dirty || apikey.touched)">
+              <span *ngIf="apikey.errors.required" class="mdl-textfield__error">
+                apikey is required.
+                <span class="color-text--orange">
+                  Please, write any valid apikey.</span
+                >
+              </span>
+              <span *ngIf="apikey.errors.pattern" class="mdl-textfield__error">
+                apikey is invalid.
+              </span>
+            </div>
+          </div>
+
+          <div class="full-size color-text--red" *ngIf="error">{{ error }}</div>
+        </div>
+        <div
+          class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone submit-cell"
+        >
+          <div class="mdl-layout-spacer"></div>
+          <button
+            class="mdl-button mdl-js-button mdl-button--raised color--light-blue"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
+            LOGIN
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

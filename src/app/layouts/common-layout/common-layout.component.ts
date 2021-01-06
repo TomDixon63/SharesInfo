@@ -22,7 +22,9 @@ export class CommonLayoutComponent implements OnInit {
   }
 
   public logout() {
-    this.authService.logout()
-      .subscribe(res => this.router.navigate(['/pages/login']));
+    //this.authService.logout()
+    //  .subscribe(res => this.router.navigate(['/pages/login']));
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }
