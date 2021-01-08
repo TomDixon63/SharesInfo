@@ -44,5 +44,11 @@ export class UtilService {
     if (symbol.includes("WMT")) {
       return "Wallmart";
     }
+    if (symbol.includes("TSLA")) {
+      return "Tesla Inc.";
+    }
+    if (symbol.includes("BA")) {
+      return "Boeing Company";
+    }
   }
 }
