@@ -28,7 +28,7 @@ It uses a free dark material theme by  [creativeit.io](http://material-angular-d
 
 
 
-#### Compare shares paerformance
+#### Compare shares performance
 
 ![compare](/screenshots/compare.png)
 
