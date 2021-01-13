@@ -10,7 +10,7 @@ It uses a free dark material theme by  [creativeit.io](http://material-angular-d
 
 ![login](/screenshots/login.png)
 
-#### Dashboard 
+#### Dashboard after login without watchlist entries
 
 ![dashboard1](/screenshots/dashboard_without_watchlist_entries.png)
 
@@ -18,11 +18,11 @@ It uses a free dark material theme by  [creativeit.io](http://material-angular-d
 
 ![search](/screenshots/search.png)
 
-#### Share details
+#### Share details and add to watchlist
 
 ![details](/screenshots/details.png)
 
-#### Dashboard with watchlist
+#### Dashboard with watchlist entries
 
 ![dashboard2](/screenshots/dashboard_with_watchlist.png)
 
